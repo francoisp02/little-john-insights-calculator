@@ -5,10 +5,10 @@ import { AnimatedCounter } from './AnimatedCounter';
 import { DetailModal } from './DetailModal';
 import littleJohnLogo from '../assets/littlejohn-logo.png';
 
-type InsuranceType = 'flotte auto' | 'RC pro' | 'multirisque';
+type InsuranceType = 'flotte automobile' | 'RC Pro' | 'Multirisque';
 
 export const Calculator = () => {
-  const [insuranceType, setInsuranceType] = useState<InsuranceType>('flotte auto');
+  const [insuranceType, setInsuranceType] = useState<InsuranceType>('flotte automobile');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
@@ -21,7 +21,7 @@ export const Calculator = () => {
   const [annualCommission, setAnnualCommission] = useState(0);
   const [timeSaved, setTimeSaved] = useState(0);
   
-  const insuranceOptions: InsuranceType[] = ['flotte auto', 'RC pro', 'multirisque'];
+  const insuranceOptions: InsuranceType[] = ['flotte automobile', 'RC Pro', 'Multirisque'];
   
   useEffect(() => {
     // Commission calculation: nombre × (1/3) × 12 × prime moyenne
@@ -67,7 +67,7 @@ export const Calculator = () => {
                         setInsuranceType(option);
                         setIsDropdownOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2.5 hover:bg-surface-variant transition-colors duration-150 text-base font-medium text-foreground hover:text-primary"
+                      className="block w-full text-left px-4 py-2 hover:bg-surface-variant transition-colors duration-150 text-sm"
                     >
                       {option}
                     </button>
