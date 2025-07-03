@@ -2,41 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Little John Calculator Design System - Premium B2B SaaS Style */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    /* Core Colors - Clean & Professional */
+    --background: 0 0% 99%;
+    --foreground: 215 25% 27%;
+    --surface: 0 0% 100%;
+    --surface-variant: 220 14% 96%;
+    
+    /* Brand Colors - Subtle Green Accent */
+    --primary: 142 76% 36%;
+    --primary-soft: 142 56% 92%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Neutral Grays - Material 3 Inspired */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 215 25% 27%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 47%;
+    
+    /* Interactive States */
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 142 76% 32%;
+    
+    /* UI Elements */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --card-foreground: 215 25% 27%;
+    --border: 220 13% 91%;
+    --input: 0 0% 100%;
+    --ring: 142 76% 36%;
+    
+    /* Semantic Colors */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 93% 47%;
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Shadows & Effects */
+    --shadow-soft: 0 1px 3px 0 hsl(215 25% 27% / 0.1), 0 1px 2px 0 hsl(215 25% 27% / 0.06);
+    --shadow-medium: 0 4px 6px -1px hsl(215 25% 27% / 0.1), 0 2px 4px -1px hsl(215 25% 27% / 0.06);
+    --shadow-large: 0 20px 25px -5px hsl(215 25% 27% / 0.1), 0 10px 10px -5px hsl(215 25% 27% / 0.04);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 42%));
+    --gradient-surface: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 14% 98%));
+    
+    /* Animations */
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Spacing & Layout */
+    --radius: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +124,133 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: 'cv03', 'cv04', 'cv11';
   }
+}
+
+@layer components {
+  /* Slider Components */
+  .slider-container {
+    @apply relative w-full h-2 bg-muted rounded-full overflow-hidden;
+  }
+  
+  .slider-track {
+    @apply absolute h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-300;
+  }
+  
+  .slider-thumb {
+    @apply absolute w-6 h-6 bg-surface border-2 border-primary rounded-full shadow-medium cursor-pointer;
+    @apply hover:scale-110 transition-transform duration-200;
+    @apply focus:outline-none focus:ring-4 focus:ring-primary/20;
+    top: -8px;
+  }
+  
+  /* Button Variants */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-accent text-primary-foreground px-8 py-4 rounded-xl;
+    @apply font-medium text-lg shadow-medium hover:shadow-large;
+    @apply transition-all duration-300 hover:scale-[1.02];
+  }
+  
+  .btn-secondary {
+    @apply bg-surface text-foreground border border-border px-6 py-3 rounded-lg;
+    @apply font-medium shadow-soft hover:shadow-medium;
+    @apply transition-all duration-200 hover:bg-surface-variant;
+  }
+  
+  /* Card Components */
+  .card-premium {
+    @apply bg-surface border border-border rounded-xl p-8 shadow-soft;
+    @apply hover:shadow-medium transition-shadow duration-300;
+  }
+  
+  /* Dropdown Inline */
+  .dropdown-inline {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-lg;
+    @apply bg-primary-soft text-primary font-medium cursor-pointer;
+    @apply hover:bg-primary/10 transition-colors duration-200;
+  }
+  
+  /* Modal Styles */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-50;
+    @apply flex items-center justify-center p-4;
+  }
+  
+  .modal-content {
+    @apply bg-surface rounded-xl shadow-large max-w-2xl w-full max-h-[90vh] overflow-y-auto;
+    @apply transform transition-all duration-300;
+  }
+  
+  /* Animations */
+  .animate-counter {
+    @apply transition-all duration-700 ease-out;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Typography Scale */
+.text-display {
+  @apply text-5xl font-bold tracking-tight;
+}
+
+.text-headline {
+  @apply text-3xl font-semibold tracking-tight;
+}
+
+.text-title {
+  @apply text-xl font-medium;
+}
+
+.text-body {
+  @apply text-base leading-relaxed;
+}
+
+.text-caption {
+  @apply text-sm text-muted-foreground;
 }
