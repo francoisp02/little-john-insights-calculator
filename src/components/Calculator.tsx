@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import { SliderInput } from './SliderInput';
 import { AnimatedCounter } from './AnimatedCounter';
 import { DetailModal } from './DetailModal';
+import littleJohnLogo from '../assets/littlejohn-logo.png';
 
 type InsuranceType = 'flotte automobile' | 'RC Pro' | 'Multirisque';
 
@@ -39,9 +40,13 @@ export const Calculator = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
-          <h1 className="text-display mb-6 bg-gradient-primary bg-clip-text text-transparent">
-            Calculatrice Little John
-          </h1>
+          <div className="flex items-center justify-center mb-6">
+            <img 
+              src={littleJohnLogo} 
+              alt="Little John" 
+              className="h-16 w-auto"
+            />
+          </div>
           <div className="text-headline text-foreground max-w-4xl mx-auto leading-relaxed">
             Découvrez combien de temps un salarié économise et combien vous gagnerez grâce à Little John pour{' '}
             <div className="relative inline-block">
@@ -54,7 +59,7 @@ export const Calculator = () => {
               </button>
               
               {isDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 bg-surface border border-border rounded-lg shadow-large py-2 z-10 min-w-full animate-scale-in">
+                <div className="absolute top-full left-0 mt-2 bg-surface border border-border rounded-lg shadow-large py-2 z-50 min-w-full animate-scale-in">
                   {insuranceOptions.map((option) => (
                     <button
                       key={option}
@@ -62,7 +67,7 @@ export const Calculator = () => {
                         setInsuranceType(option);
                         setIsDropdownOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 hover:bg-surface-variant transition-colors duration-150"
+                      className="block w-full text-left px-4 py-2 hover:bg-surface-variant transition-colors duration-150 text-sm"
                     >
                       {option}
                     </button>
