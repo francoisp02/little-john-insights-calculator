@@ -26,7 +26,9 @@ export const Calculator = () => {
   useEffect(() => {
     // Commission calculation: nombre × (1/3) × 12 × prime moyenne
     const commission = contractsPerMonth * (1/3) * 12 * averagePremium;
-    setAnnualCommission(commission);
+    // Chiffre d'affaires additionnel = commission HT × 0.15
+    const additionalRevenue = commission * 0.15;
+    setAnnualCommission(additionalRevenue);
     
     // Time saved calculation: (nombre × 0.75 × 40) - (nombre × 0.75 × temps moyen)
     const timeWithLittleJohn = contractsPerMonth * 0.75 * 0.5; // 30 minutes with Little John
@@ -49,7 +51,7 @@ export const Calculator = () => {
           </div>
           <div className="text-headline text-foreground max-w-4xl mx-auto leading-relaxed">
             Découvrez combien de temps un salarié économise et combien vous gagnerez grâce à Little John pour{' '}
-            <div className="relative inline-block">
+            <div className="relative inline-block z-[9999]">
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="dropdown-inline"
@@ -97,7 +99,7 @@ export const Calculator = () => {
                 />
                 
                 <SliderInput
-                  label={`Prime moyenne d'un contrat ${insuranceType} (€)`}
+                  label={`Prime moyenne HT d'un contrat ${insuranceType} (€)`}
                   value={averagePremium}
                   onChange={setAveragePremium}
                   min={7000}
@@ -127,7 +129,7 @@ export const Calculator = () => {
               
               <div className="space-y-8">
                 <div className="text-center">
-                  <p className="text-body text-muted-foreground mb-2">Commission générée grâce à Little John :</p>
+                  <p className="text-body text-muted-foreground mb-2">Chiffre d'affaires additionnel grâce à Little John :</p>
                   <div className="text-display text-primary">
                     <AnimatedCounter value={annualCommission} /> € / an
                   </div>
@@ -152,8 +154,8 @@ export const Calculator = () => {
                 </div>
                 <p className="text-body text-primary leading-relaxed">
                   <strong>Économisez {timeSaved.toFixed(1)}h par mois</strong> et générez{' '}
-                  <strong>{annualCommission.toLocaleString('fr-FR')} € de commissions annuelles</strong>{' '}
-                  supplémentaires avec Little John.
+                  <strong>{annualCommission.toLocaleString('fr-FR')} € de chiffre d'affaires additionnel annuel</strong>{' '}
+                  grâce à Little John.
                 </p>
               </div>
             </div>
