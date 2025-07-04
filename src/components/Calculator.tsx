@@ -3,13 +3,13 @@ import { ChevronDown } from 'lucide-react';
 import { SliderInput } from './SliderInput';
 import { AnimatedCounter } from './AnimatedCounter';
 import { DetailModal } from './DetailModal';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 import littleJohnLogo from '../assets/littlejohn-logo.png';
 
 type InsuranceType = 'flotte automobile' | 'RC Pro' | 'Multirisque';
 
 export const Calculator = () => {
   const [insuranceType, setInsuranceType] = useState<InsuranceType>('flotte automobile');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   // Inputs
@@ -92,32 +92,27 @@ export const Calculator = () => {
           </div>
           <div className="text-headline text-foreground max-w-4xl mx-auto leading-relaxed">
             Découvrez combien de temps un salarié économise et combien vous gagnerez grâce à Little John pour{' '}
-            <div className="relative inline-block z-[9999]">
-              <button
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="dropdown-inline"
-              >
-                {insuranceType}
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-              
-              {isDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 bg-surface border border-border rounded-lg shadow-large py-2 z-[9999] min-w-full animate-scale-in">
-                  {insuranceOptions.map((option) => (
-                    <button
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="dropdown-inline">
+                  {insuranceType}
+                  <ChevronDown className="w-4 h-4 transition-transform duration-200" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-surface border border-border shadow-large">
+                {insuranceOptions
+                  .filter(option => option !== insuranceType)
+                  .map((option) => (
+                    <DropdownMenuItem
                       key={option}
-                      onClick={() => {
-                        setInsuranceType(option);
-                        setIsDropdownOpen(false);
-                      }}
-                      className="block w-full text-left px-4 py-2 hover:bg-surface-variant transition-colors duration-150 text-sm"
+                      onClick={() => setInsuranceType(option)}
+                      className="cursor-pointer hover:bg-surface-variant transition-colors duration-150"
                     >
                       {option}
-                    </button>
+                    </DropdownMenuItem>
                   ))}
-                </div>
-              )}
-            </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
 
