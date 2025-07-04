@@ -59,7 +59,7 @@ export const Calculator = () => {
               </button>
               
               {isDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 bg-surface border border-border rounded-lg shadow-large py-2 z-50 min-w-full animate-scale-in">
+                <div className="absolute top-full left-0 mt-2 bg-surface border border-border rounded-lg shadow-large py-2 z-[9999] min-w-full animate-scale-in">
                   {insuranceOptions.map((option) => (
                     <button
                       key={option}
