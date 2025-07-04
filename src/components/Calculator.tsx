@@ -23,11 +23,52 @@ export const Calculator = () => {
   
   const insuranceOptions: InsuranceType[] = ['flotte automobile', 'RC Pro', 'Multirisque'];
   
+  // Dynamic limits based on insurance type
+  const getLimits = () => {
+    if (insuranceType === 'RC Pro') {
+      return {
+        contracts: { min: 0, max: 700, step: 1 },
+        premium: { min: 15, max: 15000, step: 50 },
+        time: { min: 0.08, max: 2, step: 0.08 }
+      };
+    }
+    // Default limits for other insurance types
+    return {
+      contracts: { min: 0, max: 30, step: 1 },
+      premium: { min: 7000, max: 25000, step: 500 },
+      time: { min: 1.5, max: 5, step: 0.25 }
+    };
+  };
+
+  const limits = getLimits();
+
+  // Adjust values when insurance type changes
   useEffect(() => {
-    // Commission calculation: nombre × (1/3) × 12 × prime moyenne
-    const commission = contractsPerMonth * (1/3) * 12 * averagePremium;
-    // Chiffre d'affaires additionnel = commission HT × 0.15
-    const additionalRevenue = commission * 0.15;
+    const newLimits = getLimits();
+    
+    // Adjust values to fit within new limits
+    if (contractsPerMonth > newLimits.contracts.max) {
+      setContractsPerMonth(newLimits.contracts.max);
+    } else if (contractsPerMonth < newLimits.contracts.min) {
+      setContractsPerMonth(newLimits.contracts.min);
+    }
+    
+    if (averagePremium > newLimits.premium.max) {
+      setAveragePremium(newLimits.premium.max);
+    } else if (averagePremium < newLimits.premium.min) {
+      setAveragePremium(newLimits.premium.min);
+    }
+    
+    if (timeWithoutLittleJohn > newLimits.time.max) {
+      setTimeWithoutLittleJohn(newLimits.time.max);
+    } else if (timeWithoutLittleJohn < newLimits.time.min) {
+      setTimeWithoutLittleJohn(newLimits.time.min);
+    }
+  }, [insuranceType]);
+  
+  useEffect(() => {
+    // Chiffre d'affaires additionnel: nombre × 0.33 × 12 × prime moyenne × 0.15
+    const additionalRevenue = contractsPerMonth * 0.33 * 12 * averagePremium * 0.15;
     setAnnualCommission(additionalRevenue);
     
     // Time saved calculation: (nombre × 0.75 × 40) - (nombre × 0.75 × temps moyen)
@@ -92,9 +133,9 @@ export const Calculator = () => {
                   label="Nombre de contrats signés par mois"
                   value={contractsPerMonth}
                   onChange={setContractsPerMonth}
-                  min={0}
-                  max={30}
-                  step={1}
+                  min={limits.contracts.min}
+                  max={limits.contracts.max}
+                  step={limits.contracts.step}
                   unit=""
                 />
                 
@@ -102,9 +143,9 @@ export const Calculator = () => {
                   label={`Prime moyenne HT d'un contrat ${insuranceType} (€)`}
                   value={averagePremium}
                   onChange={setAveragePremium}
-                  min={7000}
-                  max={25000}
-                  step={500}
+                  min={limits.premium.min}
+                  max={limits.premium.max}
+                  step={limits.premium.step}
                   unit="€"
                   formatValue={(value) => value.toLocaleString('fr-FR')}
                 />
@@ -113,9 +154,9 @@ export const Calculator = () => {
                   label="Temps moyen passé par contrat sans Little John (heures)"
                   value={timeWithoutLittleJohn}
                   onChange={setTimeWithoutLittleJohn}
-                  min={1.5}
-                  max={5}
-                  step={0.25}
+                  min={limits.time.min}
+                  max={limits.time.max}
+                  step={limits.time.step}
                   unit="h"
                 />
               </div>
