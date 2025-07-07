@@ -69,7 +69,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ isOpen, onClose, curre
             <>
               {/* Current Results Summary */}
               <div className="card-premium mb-8 bg-primary-soft">
-                <h3 className="text-title mb-4 text-primary">Vos résultats actuels</h3>
+                <h3 className="text-title mb-4 text-foreground">Vos résultats actuels</h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <p className="text-caption text-muted-foreground">Commission annuelle</p>
@@ -90,9 +90,9 @@ export const DetailModal: React.FC<DetailModalProps> = ({ isOpen, onClose, curre
               <div className="space-y-6 mb-8">
                 <h3 className="text-title text-foreground">Paramètres complémentaires</h3>
                 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-6 items-start">
                   <div>
-                    <label className="block text-body font-medium text-foreground mb-3">
+                    <label className="block text-body font-medium text-foreground mb-3 min-h-[3rem] flex items-center">
                       Nombre d'employés
                     </label>
                     <input
@@ -106,7 +106,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ isOpen, onClose, curre
                   </div>
 
                   <div>
-                    <label className="block text-body font-medium text-foreground mb-3">
+                    <label className="block text-body font-medium text-foreground mb-3 min-h-[3rem] flex items-center">
                       Part des {currentData.insuranceType} dans vos contrats (%)
                     </label>
                     <input
