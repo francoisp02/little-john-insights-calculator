@@ -4,7 +4,7 @@ import { SliderInput } from './SliderInput';
 import { AnimatedCounter } from './AnimatedCounter';
 import { DetailModal } from './DetailModal';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
-import littleJohnLogo from '../assets/littlejohn-logo.png';
+import littleJohnLogo from '../assets/little-john-new-logo.png';
 
 type InsuranceType = 'flotte automobile' | 'RC Pro' | 'Multirisque';
 
@@ -67,14 +67,17 @@ export const Calculator = () => {
   }, [insuranceType]);
   
   useEffect(() => {
-    // Chiffre d'affaires additionnel: nombre × 0.33 × 12 × prime moyenne × 0.15
-    const additionalRevenue = contractsPerMonth * 0.33 * 12 * averagePremium * 0.15;
+    // Pourcentage de productivité gagné grâce à Little John (interne, pas affiché)
+    const productivityPercentage = 0.20 - (3 - timeWithoutLittleJohn) / 25;
+    
+    // Chiffre d'affaires additionnel: (nombre/0.8) × % productivité × prime moyenne × 12 × 0.15
+    const additionalRevenue = (contractsPerMonth / 0.8) * productivityPercentage * averagePremium * 12 * 0.15;
     setAnnualCommission(additionalRevenue);
     
-    // Time saved calculation: (nombre × 0.75 × 40) - (nombre × 0.75 × temps moyen)
-    const timeWithLittleJohn = contractsPerMonth * 0.75 * 0.5; // 30 minutes with Little John
-    const timeWithoutTool = contractsPerMonth * 0.75 * timeWithoutLittleJohn;
-    const saved = timeWithoutTool - timeWithLittleJohn;
+    // Temps économisé: -((nombre/0.8 × 40) - (nombre/0.8 × temps moyen)) - toujours positif
+    const timeWithoutTool = (contractsPerMonth / 0.8) * timeWithoutLittleJohn;
+    const timeWithLittleJohn = (contractsPerMonth / 0.8) * 0.67; // 40 minutes with Little John
+    const saved = Math.abs(timeWithoutTool - timeWithLittleJohn);
     setTimeSaved(saved);
   }, [contractsPerMonth, averagePremium, timeWithoutLittleJohn]);
 
