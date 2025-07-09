@@ -4,7 +4,7 @@ import { SliderInput } from './SliderInput';
 import { AnimatedCounter } from './AnimatedCounter';
 import { DetailModal } from './DetailModal';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
-import littleJohnLogo from '../assets/littlejohn-logo.png';
+import littleJohnLogo from '../assets/little-john-logo.png';
 
 type InsuranceType = 'flotte automobile' | 'RC Pro' | 'Multirisque';
 
@@ -74,10 +74,10 @@ export const Calculator = () => {
     const additionalRevenue = (contractsPerMonth / 0.8) * productivityPercentage * averagePremium * 12 * 0.15;
     setAnnualCommission(additionalRevenue);
     
-    // Temps économisé: -((nombre/0.8 × 40) - (nombre/0.8 × temps moyen)) - toujours positif
-    const timeWithoutTool = (contractsPerMonth / 0.8) * 40;
-    const timeWithLittleJohn = (contractsPerMonth / 0.8) * timeWithoutLittleJohn;
-    const saved = Math.abs(-(timeWithoutTool - timeWithLittleJohn));
+    // Temps économisé: (-(nombre/0.8 × 0.66h) - (nombre/0.8 × temps moyen))/7 - toujours positif
+    const timeWithLittleJohn = (contractsPerMonth / 0.8) * 0.66;
+    const timeWithoutTool = (contractsPerMonth / 0.8) * timeWithoutLittleJohn;
+    const saved = Math.abs(-(timeWithLittleJohn - timeWithoutTool)) / 7;
     setTimeSaved(saved);
   }, [contractsPerMonth, averagePremium, timeWithoutLittleJohn]);
 
@@ -169,14 +169,14 @@ export const Calculator = () => {
               <div className="space-y-8">
                 <div className="text-center">
                   <p className="text-body text-muted-foreground mb-2">Temps économisé :</p>
-                  <div className="text-headline text-accent">
-                    <AnimatedCounter value={timeSaved / 7} precision={1} /> jours / mois
+                  <div className="text-display text-accent">
+                    <AnimatedCounter value={timeSaved} precision={1} /> jours / mois
                   </div>
                 </div>
                 
                 <div className="text-center">
                   <p className="text-body text-muted-foreground mb-2">Chiffre d'affaires additionnel grâce à Little John :</p>
-                  <div className="text-display text-primary">
+                  <div className="text-headline text-primary">
                     <AnimatedCounter value={annualCommission} /> € / an
                   </div>
                 </div>
@@ -192,7 +192,7 @@ export const Calculator = () => {
                   </svg>
                 </div>
                 <p className="text-body text-primary leading-relaxed">
-                  <strong>Économisez {(timeSaved / 7).toFixed(1)} jours par mois</strong> et générez{' '}
+                  <strong>Économisez {timeSaved.toFixed(1)} jours par mois</strong> et générez{' '}
                   <strong>{annualCommission.toLocaleString('fr-FR')} € de chiffre d'affaires additionnel annuel</strong>{' '}
                   grâce à Little John.
                 </p>
