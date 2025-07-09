@@ -4,7 +4,7 @@ import { SliderInput } from './SliderInput';
 import { AnimatedCounter } from './AnimatedCounter';
 import { DetailModal } from './DetailModal';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
-import littleJohnLogo from '../assets/little-john-new-logo.png';
+import littleJohnLogo from '../assets/littlejohn-logo.png';
 
 type InsuranceType = 'flotte automobile' | 'RC Pro' | 'Multirisque';
 
@@ -75,9 +75,9 @@ export const Calculator = () => {
     setAnnualCommission(additionalRevenue);
     
     // Temps économisé: -((nombre/0.8 × 40) - (nombre/0.8 × temps moyen)) - toujours positif
-    const timeWithoutTool = (contractsPerMonth / 0.8) * timeWithoutLittleJohn;
-    const timeWithLittleJohn = (contractsPerMonth / 0.8) * 0.67; // 40 minutes with Little John
-    const saved = Math.abs(timeWithoutTool - timeWithLittleJohn);
+    const timeWithoutTool = (contractsPerMonth / 0.8) * 40;
+    const timeWithLittleJohn = (contractsPerMonth / 0.8) * timeWithoutLittleJohn;
+    const saved = Math.abs(-(timeWithoutTool - timeWithLittleJohn));
     setTimeSaved(saved);
   }, [contractsPerMonth, averagePremium, timeWithoutLittleJohn]);
 
