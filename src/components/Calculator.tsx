@@ -168,16 +168,16 @@ export const Calculator = () => {
               
               <div className="space-y-8">
                 <div className="text-center">
-                  <p className="text-body text-muted-foreground mb-2">Chiffre d'affaires additionnel grâce à Little John :</p>
-                  <div className="text-display text-primary">
-                    <AnimatedCounter value={annualCommission} /> € / an
+                  <p className="text-body text-muted-foreground mb-2">Temps économisé :</p>
+                  <div className="text-headline text-accent">
+                    <AnimatedCounter value={timeSaved / 7} precision={1} /> jours / mois
                   </div>
                 </div>
                 
                 <div className="text-center">
-                  <p className="text-body text-muted-foreground mb-2">Temps économisé :</p>
-                  <div className="text-headline text-accent">
-                    <AnimatedCounter value={timeSaved} precision={1} /> h / mois
+                  <p className="text-body text-muted-foreground mb-2">Chiffre d'affaires additionnel grâce à Little John :</p>
+                  <div className="text-display text-primary">
+                    <AnimatedCounter value={annualCommission} /> € / an
                   </div>
                 </div>
               </div>
@@ -192,7 +192,7 @@ export const Calculator = () => {
                   </svg>
                 </div>
                 <p className="text-body text-primary leading-relaxed">
-                  <strong>Économisez {timeSaved.toFixed(1)}h par mois</strong> et générez{' '}
+                  <strong>Économisez {(timeSaved / 7).toFixed(1)} jours par mois</strong> et générez{' '}
                   <strong>{annualCommission.toLocaleString('fr-FR')} € de chiffre d'affaires additionnel annuel</strong>{' '}
                   grâce à Little John.
                 </p>
