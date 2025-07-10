@@ -204,10 +204,10 @@ export const Calculator = () => {
         {/* CTA Section */}
         <div className="text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => window.location.href = '/questionnaire-step-1'}
             className="btn-primary"
           >
-            Découvrez comment éliminer ces coûts
+            Analyse détaillée
           </button>
         </div>
 

@@ -8,6 +8,7 @@ interface SliderInputProps {
   max: number;
   step: number;
   unit?: string;
+  description?: string;
   formatValue?: (value: number) => string;
 }
 
@@ -19,6 +20,7 @@ export const SliderInput: React.FC<SliderInputProps> = ({
   max,
   step,
   unit = '',
+  description,
   formatValue
 }) => {
   const [isDragging, setIsDragging] = useState(false);
@@ -90,9 +92,16 @@ export const SliderInput: React.FC<SliderInputProps> = ({
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <label className="text-body font-medium text-foreground">
-          {label}
-        </label>
+        <div>
+          <label className="text-body font-medium text-foreground">
+            {label}
+          </label>
+          {description && (
+            <p className="text-sm text-muted-foreground mt-1">
+              {description}
+            </p>
+          )}
+        </div>
         <div className="flex items-center gap-2">
           <input
             type="text"
