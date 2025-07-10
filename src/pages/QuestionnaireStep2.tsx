@@ -8,7 +8,6 @@ import { SliderInput } from '@/components/SliderInput';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import littleJohnLogo from '../assets/little-john-logo.png';
-
 export const QuestionnaireStep2 = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -18,21 +17,16 @@ export const QuestionnaireStep2 = () => {
     employeeCount: '',
     hourlyRate: 27
   });
-
   const handleSubmit = () => {
     // Store step 2 data in localStorage
     localStorage.setItem('questionnaireStep2', JSON.stringify(formData));
     navigate('/analyse-en-cours');
   };
-
   const handleBack = () => {
     navigate('/questionnaire-step-1');
   };
-
   const isFormValid = formData.averagePremium > 0;
-
-  return (
-    <div className="min-h-screen bg-gradient-subtle">
+  return <div className="min-h-screen bg-gradient-subtle">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex justify-center mb-8">
@@ -50,7 +44,7 @@ export const QuestionnaireStep2 = () => {
 
         {/* Main Content */}
         <div className="max-w-2xl mx-auto">
-          <Card className="p-8">
+          <Card className="p-8 px-[10px]">
             <div className="text-center mb-8">
               <h1 className="text-headline text-primary mb-2">
                 Analyse personnalisée - Étape 2
@@ -61,90 +55,53 @@ export const QuestionnaireStep2 = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <SliderInput
-                label="Nombre de contrats flotte automobile signés par mois"
-                value={formData.contractsPerMonth}
-                onChange={(value) => setFormData({ ...formData, contractsPerMonth: value })}
-                min={3}
-                max={40}
-                step={1}
-                unit=""
-              />
+              <SliderInput label="Nombre de contrats flotte automobile signés par mois" value={formData.contractsPerMonth} onChange={value => setFormData({
+              ...formData,
+              contractsPerMonth: value
+            })} min={3} max={40} step={1} unit="" />
 
-              <SliderInput
-                label="Prime moyenne TTC d'un contrat flotte automobile (€)"
-                value={formData.averagePremium}
-                onChange={(value) => setFormData({ ...formData, averagePremium: value })}
-                min={7000}
-                max={30000}
-                step={100}
-                unit="€"
-              />
+              <SliderInput label="Prime moyenne TTC d'un contrat flotte automobile (€)" value={formData.averagePremium} onChange={value => setFormData({
+              ...formData,
+              averagePremium: value
+            })} min={7000} max={30000} step={100} unit="€" />
 
-              <SliderInput
-                label="Pourcentage des prospects devenant clients"
-                value={formData.conversionRate}
-                onChange={(value) => setFormData({ ...formData, conversionRate: value })}
-                min={0}
-                max={100}
-                step={5}
-                unit="%"
-              />
+              <SliderInput label="Pourcentage des prospects devenant clients" value={formData.conversionRate} onChange={value => setFormData({
+              ...formData,
+              conversionRate: value
+            })} min={0} max={100} step={5} unit="%" />
 
               <div className="space-y-2">
                 <Label htmlFor="employeeCount" className="text-sm font-medium">
                   Effectif total de votre entreprise
                 </Label>
-                <Input
-                  id="employeeCount"
-                  type="number"
-                  value={formData.employeeCount}
-                  onChange={(e) => setFormData({ ...formData, employeeCount: e.target.value })}
-                  placeholder="Ex: 5"
-                  className="text-lg"
-                />
+                <Input id="employeeCount" type="number" value={formData.employeeCount} onChange={e => setFormData({
+                ...formData,
+                employeeCount: e.target.value
+              })} placeholder="Ex: 5" className="text-lg" />
               </div>
 
-              <SliderInput
-                label="Taux horaire (€)"
-                value={formData.hourlyRate}
-                onChange={(value) => setFormData({ ...formData, hourlyRate: value })}
-                min={15}
-                max={35}
-                step={1}
-                unit="€"
-              />
+              <SliderInput label="Taux horaire (€)" value={formData.hourlyRate} onChange={value => setFormData({
+              ...formData,
+              hourlyRate: value
+            })} min={15} max={35} step={1} unit="€" />
             </div>
 
             <div className="mt-8 flex justify-center gap-4">
-              <Button
-                variant="outline"
-                onClick={handleBack}
-                size="lg"
-                className="flex items-center gap-2 min-w-[200px]"
-              >
+              <Button variant="outline" onClick={handleBack} size="lg" className="flex items-center gap-2 min-w-[200px]">
                 <ArrowLeft className="h-4 w-4" />
                 Retour
               </Button>
-              <Button
-                onClick={handleSubmit}
-                size="lg"
-                disabled={!isFormValid}
-                className="flex items-center gap-2 min-w-[200px]"
-              >
+              <Button onClick={handleSubmit} size="lg" disabled={!isFormValid} className="flex items-center gap-2 min-w-[200px]">
                 Lancer l'analyse approfondie
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
 
-            {!isFormValid && (
-              <p className="text-sm text-muted-foreground text-center mt-4">
+            {!isFormValid && <p className="text-sm text-muted-foreground text-center mt-4">
                 * Veuillez remplir le champ Prime moyenne TTC
-              </p>
-            )}
+              </p>}
           </Card>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
