@@ -96,11 +96,6 @@ export const SliderInput: React.FC<SliderInputProps> = ({
           <label className="text-body font-medium text-foreground">
             {label}
           </label>
-          {description && (
-            <p className="text-sm text-muted-foreground mt-1">
-              {description}
-            </p>
-          )}
         </div>
         <div className="flex items-center gap-2">
           <input
@@ -108,9 +103,9 @@ export const SliderInput: React.FC<SliderInputProps> = ({
             value={inputValue}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
-            className="w-20 px-2 py-1 text-sm text-right bg-surface border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className="w-24 px-2 py-1 text-sm text-right bg-surface border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 font-bold"
           />
-          {unit && <span className="text-caption text-muted-foreground">{unit}</span>}
+          {unit && <span className="text-caption text-muted-foreground font-bold">{unit}</span>}
         </div>
       </div>
       

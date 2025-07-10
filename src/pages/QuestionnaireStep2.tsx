@@ -13,7 +13,7 @@ export const QuestionnaireStep2 = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     contractsPerMonth: 15,
-    averagePremium: 0,
+    averagePremium: 15000,
     conversionRate: 80,
     employeeCount: '',
     hourlyRate: 27
@@ -29,21 +29,13 @@ export const QuestionnaireStep2 = () => {
     navigate('/questionnaire-step-1');
   };
 
-  const isFormValid = formData.averagePremium > 0 && formData.employeeCount.trim() !== '';
+  const isFormValid = formData.averagePremium > 0;
 
   return (
     <div className="min-h-screen bg-gradient-subtle">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <Button
-            variant="ghost"
-            onClick={handleBack}
-            className="flex items-center gap-2"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Retour
-          </Button>
+        <div className="flex justify-center mb-8">
           <img src={littleJohnLogo} alt="Little John" className="h-8" />
         </div>
 
@@ -68,49 +60,40 @@ export const QuestionnaireStep2 = () => {
               </p>
             </div>
 
-            <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <SliderInput
-                label="Nombre de contrats signés par mois"
+                label="Nombre de contrats flotte automobile signés par mois"
                 value={formData.contractsPerMonth}
                 onChange={(value) => setFormData({ ...formData, contractsPerMonth: value })}
                 min={3}
                 max={40}
                 step={1}
                 unit=""
-                description="Volume mensuel de nouveaux contrats"
               />
 
-              <div className="space-y-2">
-                <Label htmlFor="averagePremium" className="text-sm font-medium">
-                  Prime moyenne TTC d'un contrat flotte automobile (€) *
-                </Label>
-                <Input
-                  id="averagePremium"
-                  type="number"
-                  value={formData.averagePremium || ''}
-                  onChange={(e) => setFormData({ ...formData, averagePremium: parseFloat(e.target.value) || 0 })}
-                  placeholder="Ex: 2500"
-                  className="text-lg"
-                />
-                <p className="text-sm text-muted-foreground">
-                  Montant moyen des primes de vos contrats flotte
-                </p>
-              </div>
+              <SliderInput
+                label="Prime moyenne TTC d'un contrat flotte automobile (€)"
+                value={formData.averagePremium}
+                onChange={(value) => setFormData({ ...formData, averagePremium: value })}
+                min={7000}
+                max={30000}
+                step={100}
+                unit="€"
+              />
 
               <SliderInput
-                label="Taux de conversion sur prospect rencontré"
+                label="Pourcentage des prospects devenant clients"
                 value={formData.conversionRate}
                 onChange={(value) => setFormData({ ...formData, conversionRate: value })}
                 min={0}
                 max={100}
                 step={5}
                 unit="%"
-                description="Pourcentage de prospects qui deviennent clients"
               />
 
               <div className="space-y-2">
                 <Label htmlFor="employeeCount" className="text-sm font-medium">
-                  Nombre d'employés *
+                  Effectif total de votre entreprise
                 </Label>
                 <Input
                   id="employeeCount"
@@ -120,9 +103,6 @@ export const QuestionnaireStep2 = () => {
                   placeholder="Ex: 5"
                   className="text-lg"
                 />
-                <p className="text-sm text-muted-foreground">
-                  Effectif total de votre entreprise
-                </p>
               </div>
 
               <SliderInput
@@ -133,11 +113,19 @@ export const QuestionnaireStep2 = () => {
                 max={35}
                 step={1}
                 unit="€"
-                description="Coût horaire moyen dans votre entreprise"
               />
             </div>
 
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex justify-center gap-4">
+              <Button
+                variant="outline"
+                onClick={handleBack}
+                size="lg"
+                className="flex items-center gap-2 min-w-[200px]"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Retour
+              </Button>
               <Button
                 onClick={handleSubmit}
                 size="lg"
@@ -151,7 +139,7 @@ export const QuestionnaireStep2 = () => {
 
             {!isFormValid && (
               <p className="text-sm text-muted-foreground text-center mt-4">
-                * Veuillez remplir tous les champs obligatoires
+                * Veuillez remplir le champ Prime moyenne TTC
               </p>
             )}
           </Card>

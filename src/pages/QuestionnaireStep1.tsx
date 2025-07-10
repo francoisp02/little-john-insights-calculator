@@ -30,15 +30,7 @@ export const QuestionnaireStep1 = () => {
     <div className="min-h-screen bg-gradient-subtle">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <Button
-            variant="ghost"
-            onClick={handleBack}
-            className="flex items-center gap-2"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Retour
-          </Button>
+        <div className="flex justify-center mb-8">
           <img src={littleJohnLogo} alt="Little John" className="h-8" />
         </div>
 
@@ -63,7 +55,7 @@ export const QuestionnaireStep1 = () => {
               </p>
             </div>
 
-            <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <SliderInput
                 label="Nombre d'extranets assureurs"
                 value={formData.extranetsCount}
@@ -72,44 +64,49 @@ export const QuestionnaireStep1 = () => {
                 max={7}
                 step={1}
                 unit=""
-                description="Combien d'extranets utilisez-vous actuellement ?"
               />
 
               <SliderInput
-                label="Temps de collecte et travail état de parc"
+                label="Temps de collecte de l'état de parc par dossier"
                 value={formData.collectParc}
                 onChange={(value) => setFormData({ ...formData, collectParc: value })}
                 min={0.25}
                 max={2}
                 step={0.25}
                 unit="h"
-                description="Temps moyen consacré par dossier"
               />
 
               <SliderInput
-                label="Temps de collecte et travail RI"
+                label="Temps de collecte et travail des RI par dossier"
                 value={formData.collectRI}
                 onChange={(value) => setFormData({ ...formData, collectRI: value })}
                 min={0.25}
                 max={2.5}
                 step={0.25}
                 unit="h"
-                description="Temps moyen pour les relevés d'informations"
               />
 
               <SliderInput
-                label="Temps de saisie d'un extranet"
+                label="Temps moyen de saisie par extranet"
                 value={formData.saisieExtranet}
                 onChange={(value) => setFormData({ ...formData, saisieExtranet: value })}
                 min={0.2}
                 max={1.5}
                 step={0.1}
                 unit="h"
-                description="Temps moyen de saisie par extranet"
               />
             </div>
 
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex justify-center gap-4">
+              <Button
+                variant="outline"
+                onClick={handleBack}
+                size="lg"
+                className="flex items-center gap-2 min-w-[200px]"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Retour
+              </Button>
               <Button
                 onClick={handleSubmit}
                 size="lg"
