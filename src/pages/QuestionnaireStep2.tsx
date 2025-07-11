@@ -15,8 +15,7 @@ export const QuestionnaireStep2 = () => {
     contractsPerMonth: 15,
     averagePremium: 15000,
     conversionRate: 80,
-    employeeCount: '',
-    hourlyRate: 27
+    employeeCount: ''
   });
 
   const handleSubmit = () => {
@@ -40,7 +39,7 @@ export const QuestionnaireStep2 = () => {
         </div>
 
         {/* Progress */}
-        <div className="max-w-2xl mx-auto mb-8">
+        <div className="max-w-5xl mx-auto mb-8">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-muted-foreground">Étape 2 sur 2</span>
             <span className="text-sm text-muted-foreground">100%</span>
@@ -49,8 +48,8 @@ export const QuestionnaireStep2 = () => {
         </div>
 
         {/* Main Content */}
-        <div className="max-w-2xl mx-auto">
-          <Card className="p-8">
+        <div className="max-w-5xl mx-auto">
+          <Card className="p-10">
             <div className="text-center mb-8">
               <h1 className="text-headline text-primary mb-2">
                 Analyse personnalisée - Étape 2
@@ -60,7 +59,7 @@ export const QuestionnaireStep2 = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <SliderInput
                 label="Nombre de contrats flotte automobile signés par mois"
                 value={formData.contractsPerMonth}
@@ -104,16 +103,6 @@ export const QuestionnaireStep2 = () => {
                   className="text-lg"
                 />
               </div>
-
-              <SliderInput
-                label="Taux horaire (€)"
-                value={formData.hourlyRate}
-                onChange={(value) => setFormData({ ...formData, hourlyRate: value })}
-                min={15}
-                max={35}
-                step={1}
-                unit="€"
-              />
             </div>
 
             <div className="mt-8 flex justify-center gap-4">

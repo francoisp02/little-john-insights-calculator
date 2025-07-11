@@ -35,7 +35,7 @@ export const QuestionnaireStep1 = () => {
         </div>
 
         {/* Progress */}
-        <div className="max-w-2xl mx-auto mb-8">
+        <div className="max-w-5xl mx-auto mb-8">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-muted-foreground">Étape 1 sur 2</span>
             <span className="text-sm text-muted-foreground">50%</span>
@@ -44,8 +44,8 @@ export const QuestionnaireStep1 = () => {
         </div>
 
         {/* Main Content */}
-        <div className="max-w-2xl mx-auto">
-          <Card className="p-8">
+        <div className="max-w-5xl mx-auto">
+          <Card className="p-10">
             <div className="text-center mb-8">
               <h1 className="text-headline text-primary mb-2">
                 Analyse personnalisée - Étape 1
@@ -55,7 +55,7 @@ export const QuestionnaireStep1 = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <SliderInput
                 label="Nombre d'extranets assureurs"
                 value={formData.extranetsCount}
