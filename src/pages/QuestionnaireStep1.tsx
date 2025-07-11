@@ -35,6 +35,11 @@ export const QuestionnaireStep1 = () => {
         </div>
 
 
+        {/* Progress */}
+        <div className="max-w-5xl mx-auto mb-8">
+          <Progress value={50} className="h-2" />
+        </div>
+
         {/* Main Content */}
         <div className="max-w-5xl mx-auto">
           <Card className="p-10">
