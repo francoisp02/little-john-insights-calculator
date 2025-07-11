@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { SliderInput } from '@/components/SliderInput';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import littleJohnLogo from '../assets/little-john-logo.png';
+import littleJohnLogo from '../assets/LOGO_LITTLE_JOHN_NOIR_DEGRADE_RVB.png';
 
 export const QuestionnaireStep1 = () => {
   const navigate = useNavigate();
@@ -34,14 +34,6 @@ export const QuestionnaireStep1 = () => {
           <img src={littleJohnLogo} alt="Little John" className="h-8" />
         </div>
 
-        {/* Progress */}
-        <div className="max-w-5xl mx-auto mb-8">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-muted-foreground">Étape 1 sur 2</span>
-            <span className="text-sm text-muted-foreground">50%</span>
-          </div>
-          <Progress value={50} className="h-2" />
-        </div>
 
         {/* Main Content */}
         <div className="max-w-5xl mx-auto">
