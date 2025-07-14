@@ -95,27 +95,9 @@ export const Calculator = () => {
           </div>
           <div className="text-headline text-foreground max-w-4xl mx-auto leading-relaxed">
             Découvrez combien de temps un salarié économise et combien vous gagnerez grâce à Little John pour{' '}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="dropdown-inline">
-                  {insuranceType}
-                  <ChevronDown className="w-4 h-4 transition-transform duration-200" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-surface border border-border shadow-large">
-                {insuranceOptions
-                  .filter(option => option !== insuranceType)
-                  .map((option) => (
-                    <DropdownMenuItem
-                      key={option}
-                      onClick={() => setInsuranceType(option)}
-                      className="cursor-pointer hover:bg-surface-variant transition-colors duration-150"
-                    >
-                      {option}
-                    </DropdownMenuItem>
-                  ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <span className="dropdown-inline cursor-default">
+              {insuranceType}
+            </span>
           </div>
         </div>
 
