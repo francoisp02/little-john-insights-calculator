@@ -19,13 +19,14 @@ export const ContactConfirmation = () => {
     firstName: '',
     lastName: '',
     email: '',
+    company: '',
     message: ''
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.firstName || !formData.lastName || !formData.email) {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.company) {
       toast({
         title: "Erreur",
         description: "Veuillez remplir tous les champs obligatoires",
@@ -196,16 +197,28 @@ export const ContactConfirmation = () => {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email">Email professionnel *</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="jean.dupont@exemple.fr"
-                  required
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email professionnel *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="jean.dupont@exemple.fr"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="company">Entreprise *</Label>
+                  <Input
+                    id="company"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    placeholder="Nom de l'entreprise"
+                    required
+                  />
+                </div>
               </div>
 
               <div className="space-y-2">
