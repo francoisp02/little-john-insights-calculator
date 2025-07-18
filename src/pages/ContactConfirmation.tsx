@@ -19,13 +19,13 @@ export const ContactConfirmation = () => {
     firstName: '',
     lastName: '',
     email: '',
-    company: '',
+    company: '', // Nouveau champ pour le nom de l'organisation
     message: ''
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.company) {
       toast({
         title: "Erreur",
@@ -38,14 +38,35 @@ export const ContactConfirmation = () => {
     setIsLoading(true);
 
     try {
-      // Get questionnaire data from localStorage
+      // Récupération des données du questionnaire du localStorage
+      // Assurez-vous que les clés et les noms de champs dans localStorage
+      // correspondent aux noms attendus par le backend.
+      // Par exemple, 'questionnaireStep1' doit contenir:
+      // - nombreContratsFlotteAutoSignesParMois
+      // - pourcentageProspectsDevenantClients
+      // - primeMoyenneTTCContratFlotteAuto
+      // - effectifTotalEntreprise
+      // - nombreExtranetsAssureurs
+      // - tempsCollecteEtatParcDossierHeures
+      // - tempsCollecteTravailRIDossierHeures
+      // - tempsMoyenSaisieParExtranetHeures
+
       const step1Data = JSON.parse(localStorage.getItem('questionnaireStep1') || '{}');
       const step2Data = JSON.parse(localStorage.getItem('questionnaireStep2') || '{}');
-      
+
       const completeData = {
-        ...step1Data,
-        ...step2Data,
-        contact: formData,
+        // Fusion des données des étapes du questionnaire
+        ...step1Data, // Contient les nouvelles données de calcul
+        // ...step2Data, // Si step2Data contient des informations encore pertinentes, fusionnez-les ici
+        
+        // Informations de contact et de l'organisation
+        contact: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          message: formData.message,
+        },
+        organizationName: formData.company, // <-- Le nom de l'organisation est envoyé ici
         timestamp: new Date().toISOString()
       };
 
@@ -65,13 +86,13 @@ export const ContactConfirmation = () => {
       }
 
       console.log('Analyse traitée avec succès:', data);
-      
-      // Clear localStorage
+
+      // Nettoyage du localStorage
       localStorage.removeItem('questionnaireStep1');
       localStorage.removeItem('questionnaireStep2');
-      
+
       setIsSubmitted(true);
-      
+
       toast({
         title: "Succès !",
         description: "Votre analyse a été envoyée par email et votre profil créé.",
@@ -79,7 +100,7 @@ export const ContactConfirmation = () => {
 
     } catch (error: any) {
       console.error('Erreur lors du traitement:', error);
-      
+
       toast({
         title: "Erreur",
         description: error.message || "Une erreur est survenue lors du traitement de votre demande.",
@@ -91,7 +112,7 @@ export const ContactConfirmation = () => {
   };
 
   const handleBack = () => {
-    navigate('/analyse-en-cours');
+    navigate('/analyse-en-cours'); // Assurez-vous que cette route existe
   };
 
   const handleNewAnalysis = () => {
@@ -117,7 +138,7 @@ export const ContactConfirmation = () => {
                     Merci ! Votre analyse est en route
                   </h1>
                   <p className="text-body text-muted-foreground">
-                    Vous recevrez votre analyse détaillée et vos recommandations personnalisées 
+                    Vous recevrez votre analyse détaillée et vos recommandations personnalisées
                     dans votre boîte mail sous peu.
                   </p>
                 </div>
@@ -168,7 +189,7 @@ export const ContactConfirmation = () => {
                 Recevez votre analyse détaillée
               </h1>
               <p className="text-body text-muted-foreground">
-                Votre rapport personnalisé sera envoyé directement dans votre boîte mail, 
+                Votre rapport personnalisé sera envoyé directement dans votre boîte mail,
                 accompagné d'un audit sur les leviers d'optimisation de votre entreprise.
               </p>
             </div>
