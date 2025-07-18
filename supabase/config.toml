@@ -1,1 +1,4 @@
 project_id = "cldmhftuxbkibnxiumup"
+
+[functions.process-analysis]
+verify_jwt = false

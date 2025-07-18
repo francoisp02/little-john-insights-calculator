@@ -7,12 +7,14 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Mail, Shield, CheckCircle2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import littleJohnLogo from '../assets/little-john-logo.png';
 
 export const ContactConfirmation = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -20,7 +22,7 @@ export const ContactConfirmation = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.firstName || !formData.lastName || !formData.email) {
@@ -32,25 +34,59 @@ export const ContactConfirmation = () => {
       return;
     }
 
-    // Get questionnaire data from localStorage
-    const step1Data = JSON.parse(localStorage.getItem('questionnaireStep1') || '{}');
-    const step2Data = JSON.parse(localStorage.getItem('questionnaireStep2') || '{}');
-    
-    const completeData = {
-      ...step1Data,
-      ...step2Data,
-      contact: formData,
-      timestamp: new Date().toISOString()
-    };
+    setIsLoading(true);
 
-    // Here you would normally send to your backend
-    console.log('Complete questionnaire data:', completeData);
-    
-    // Clear localStorage
-    localStorage.removeItem('questionnaireStep1');
-    localStorage.removeItem('questionnaireStep2');
-    
-    setIsSubmitted(true);
+    try {
+      // Get questionnaire data from localStorage
+      const step1Data = JSON.parse(localStorage.getItem('questionnaireStep1') || '{}');
+      const step2Data = JSON.parse(localStorage.getItem('questionnaireStep2') || '{}');
+      
+      const completeData = {
+        ...step1Data,
+        ...step2Data,
+        contact: formData,
+        timestamp: new Date().toISOString()
+      };
+
+      console.log('Envoi des données pour traitement:', completeData);
+
+      // Appel de l'Edge Function pour traiter l'analyse
+      const { data, error } = await supabase.functions.invoke('process-analysis', {
+        body: completeData,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      if (!data.success) {
+        throw new Error(data.error || 'Erreur lors du traitement');
+      }
+
+      console.log('Analyse traitée avec succès:', data);
+      
+      // Clear localStorage
+      localStorage.removeItem('questionnaireStep1');
+      localStorage.removeItem('questionnaireStep2');
+      
+      setIsSubmitted(true);
+      
+      toast({
+        title: "Succès !",
+        description: "Votre analyse a été envoyée par email et votre profil créé.",
+      });
+
+    } catch (error: any) {
+      console.error('Erreur lors du traitement:', error);
+      
+      toast({
+        title: "Erreur",
+        description: error.message || "Une erreur est survenue lors du traitement de votre demande.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleBack = () => {
@@ -191,8 +227,8 @@ export const ContactConfirmation = () => {
                 </div>
               </div>
 
-              <Button type="submit" size="lg" className="w-full">
-                Recevoir mon analyse
+              <Button type="submit" size="lg" className="w-full" disabled={isLoading}>
+                {isLoading ? "Traitement en cours..." : "Recevoir mon analyse"}
               </Button>
             </form>
           </Card>
