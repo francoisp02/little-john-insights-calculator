@@ -55,19 +55,21 @@ export const ContactConfirmation = () => {
       const step2Data = JSON.parse(localStorage.getItem('questionnaireStep2') || '{}');
 
       const completeData = {
-        // Fusion des données des étapes du questionnaire
-        ...step1Data, // Contient les nouvelles données de calcul
-        // ...step2Data, // Si step2Data contient des informations encore pertinentes, fusionnez-les ici
-        
-        // Informations de contact et de l'organisation
+        organizationName: formData.company,
         contact: {
           firstName: formData.firstName,
           lastName: formData.lastName,
-          email: formData.email,
-          message: formData.message,
+          email: formData.email
         },
-        organizationName: formData.company, // <-- Le nom de l'organisation est envoyé ici
-        timestamp: new Date().toISOString()
+        nombreContratsFlotteAutoSignesParMois: step1Data.nombreContratsFlotteAutoSignesParMois,
+        pourcentageProspectsDevenantClients: step1Data.pourcentageProspectsDevenantClients,
+        primeMoyenneTTCContratFlotteAuto: step1Data.primeMoyenneTTCContratFlotteAuto,
+        effectifTotalEntreprise: step1Data.effectifTotalEntreprise,
+        extranetsCount: step1Data.extranetsCount,
+        collectParc: step1Data.collectParc,
+        collectRI: step1Data.collectRI,
+        saisieExtranet: step1Data.saisieExtranet,
+        businessLine: "flotte automobile"
       };
 
       console.log('Envoi des données pour traitement:', completeData);
