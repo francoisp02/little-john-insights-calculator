@@ -42,7 +42,7 @@ export const QuestionnaireStep2 = () => {
         <div className="max-w-5xl mx-auto">
           <Card className="p-10">
             <div className="text-center mb-8">
-              <h1 className="text-headline text-primary mb-2">Analyse personnalisée</h1>
+              <h1 className="text-headline text-primary mb-2">Vous concernant</h1>
               <p className="text-body text-muted-foreground">
                 Dernières informations pour personnaliser votre analyse
               </p>
