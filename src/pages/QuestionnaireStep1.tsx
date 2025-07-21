@@ -39,7 +39,7 @@ export const QuestionnaireStep1 = () => {
         <div className="max-w-5xl mx-auto">
           <Card className="p-10">
             <div className="text-center mb-8">
-              <h1 className="text-headline text-primary mb-2">Analyse personnalisée </h1>
+              <h1 className="text-headline text-primary mb-2">Récupération des informations clients </h1>
               <p className="text-body text-muted-foreground">
                 Parlez-nous de votre organisation actuelle
               </p>
