@@ -104,9 +104,9 @@ export const SliderInput: React.FC<SliderInputProps> = ({
               value={inputValue}
               onChange={handleInputChange}
               onBlur={handleInputBlur}
-              className={`w-24 py-1 text-sm bg-surface border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 font-bold ${unit ? 'pl-2 pr-8 text-left' : 'px-2 text-right'}`}
+              className={`w-24 py-1 text-sm bg-surface border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 font-bold ${unit ? 'pl-2 pr-6 text-right' : 'px-2 text-right'}`}
             />
-            {unit && <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-caption text-muted-foreground font-bold">{unit}</span>}
+            {unit && <span className="absolute right-1 top-1/2 transform -translate-y-1/2 text-caption text-muted-foreground font-bold">{unit}</span>}
           </div>
         </div>
       </div>
