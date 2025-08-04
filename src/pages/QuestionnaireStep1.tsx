@@ -45,7 +45,7 @@ export const QuestionnaireStep1 = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <SliderInput label="Nombre d'extranets assureurs" value={formData.extranetsCount} onChange={value => setFormData({
               ...formData,
               extranetsCount: value

@@ -48,7 +48,7 @@ export const QuestionnaireStep2 = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <SliderInput label="Nombre de contrats flotte automobile signés par mois" value={formData.contractsPerMonth} onChange={value => setFormData({
               ...formData,
               contractsPerMonth: value

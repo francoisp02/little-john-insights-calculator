@@ -98,14 +98,16 @@ export const SliderInput: React.FC<SliderInputProps> = ({
           </label>
         </div>
         <div className="flex items-center gap-2">
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            onBlur={handleInputBlur}
-            className="w-24 px-2 py-1 text-sm text-right bg-surface border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 font-bold"
-          />
-          {unit && <span className="text-caption text-muted-foreground font-bold">{unit}</span>}
+          <div className="relative">
+            <input
+              type="text"
+              value={inputValue}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+              className={`${unit ? 'w-32 pr-8' : 'w-24'} px-2 py-1 text-sm text-right bg-surface border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 font-bold`}
+            />
+            {unit && <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-caption text-muted-foreground font-bold">{unit}</span>}
+          </div>
         </div>
       </div>
       
