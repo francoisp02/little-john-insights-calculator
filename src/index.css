@@ -143,8 +143,10 @@
     @apply absolute w-6 h-6 rounded-full shadow-medium cursor-pointer;
     @apply hover:scale-110 transition-transform duration-200;
     @apply focus:outline-none focus:ring-4 focus:ring-primary/20;
-    background-color: #000000;
+    background-color: #000000 !important;
+    border: none !important;
     top: -8px;
+    z-index: 10;
   }
   
   /* Button Variants */
