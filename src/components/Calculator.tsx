@@ -116,7 +116,7 @@ export const Calculator = () => {
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
           {/* Left Side - Inputs */}
           <div className="space-y-8 animate-slide-up">
-            <div className="card-premium">
+            <div className="card-premium" style={{ paddingLeft: '1cm', paddingRight: '1cm' }}>
               <h2 className="text-title mb-8 text-foreground">Paramètres de votre activité</h2>
               
               <div className="space-y-8">
@@ -124,7 +124,7 @@ export const Calculator = () => {
                 
                 <SliderInput label={`Prime moyenne HT d'un contrat ${insuranceType} (€)`} value={averagePremium} onChange={setAveragePremium} min={limits.premium.min} max={limits.premium.max} step={limits.premium.step} unit="€" formatValue={value => value.toLocaleString('fr-FR')} />
                 
-                <SliderInput label="Temps moyen passé par contrat sans Little John (heures)" value={timeWithoutLittleJohn} onChange={setTimeWithoutLittleJohn} min={limits.time.min} max={limits.time.max} step={limits.time.step} unit="h" />
+                <SliderInput label="Temps moyen passé (h) par contrat sans Little John" value={timeWithoutLittleJohn} onChange={setTimeWithoutLittleJohn} min={limits.time.min} max={limits.time.max} step={limits.time.step} unit="h" />
               </div>
             </div>
           </div>
