@@ -140,7 +140,7 @@
   }
   
   .slider-thumb {
-    @apply absolute w-6 h-6 bg-foreground border-2 border-foreground rounded-full shadow-medium cursor-pointer;
+    @apply absolute w-6 h-6 bg-foreground rounded-full shadow-medium cursor-pointer;
     @apply hover:scale-110 transition-transform duration-200;
     @apply focus:outline-none focus:ring-4 focus:ring-primary/20;
     top: -8px;
