@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Loader2, Brain, Calculator, TrendingUp } from 'lucide-react';
-import littleJohnLogo from '../assets/little-john-logo.png';
+import littleJohnLogo from '../assets/LOGO_LITTLE_JOHN_NOIR_DEGRADE_RVB.png';
 
 export const AnalyseEnCours = () => {
   const navigate = useNavigate();

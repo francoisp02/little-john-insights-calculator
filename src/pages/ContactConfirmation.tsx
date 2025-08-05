@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Mail, Shield, CheckCircle2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import littleJohnLogo from '../assets/little-john-logo.png';
+import littleJohnLogo from '../assets/LOGO_LITTLE_JOHN_NOIR_DEGRADE_RVB.png';
 
 export const ContactConfirmation = () => {
   const navigate = useNavigate();
