@@ -23,6 +23,19 @@ export const DetailModal: React.FC<DetailModalProps> = ({ isOpen, onClose, curre
   const [revenueRange, setRevenueRange] = useState<RevenueRange>('500K-750K');
   const [isRevenueDropdownOpen, setIsRevenueDropdownOpen] = useState(false);
   
+  // Récupération des données du questionnaire pour pré-remplir les champs
+  const getQuestionnaireData = () => {
+    const step2Data = JSON.parse(localStorage.getItem('questionnaireStep2') || '{}');
+    return {
+      contractsPerMonth: step2Data.contractsPerMonth || 15,
+      averagePremiumHT: step2Data.averagePremium || 15000
+    };
+  };
+  
+  const questionnaireData = getQuestionnaireData();
+  const [contractsFleetPerMonth, setContractsFleetPerMonth] = useState(questionnaireData.contractsPerMonth);
+  const [averagePremiumTTC, setAveragePremiumTTC] = useState(Math.round(questionnaireData.averagePremiumHT * 1.3));
+  
   // Contact form
   const [contactData, setContactData] = useState({
     name: '',
@@ -90,6 +103,34 @@ export const DetailModal: React.FC<DetailModalProps> = ({ isOpen, onClose, curre
               <div className="space-y-6 mb-8">
                 <h3 className="text-title text-foreground">Paramètres complémentaires</h3>
                 
+                <div className="grid md:grid-cols-2 gap-6 items-start">
+                  <div>
+                    <label className="block text-body font-medium text-foreground mb-3 min-h-[3rem] flex items-center">
+                      Nombre de contrats flotte automobile signés par mois
+                    </label>
+                    <input
+                      type="number"
+                      value={contractsFleetPerMonth}
+                      onChange={(e) => setContractsFleetPerMonth(parseInt(e.target.value) || 0)}
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      min="1"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-body font-medium text-foreground mb-3 min-h-[3rem] flex items-center">
+                      Prime moyenne TTC d'un contrat flotte automobile (€)
+                    </label>
+                    <input
+                      type="number"
+                      value={averagePremiumTTC}
+                      onChange={(e) => setAveragePremiumTTC(parseInt(e.target.value) || 0)}
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      min="1"
+                    />
+                  </div>
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-6 items-start">
                   <div>
                     <label className="block text-body font-medium text-foreground mb-3 min-h-[3rem] flex items-center">
