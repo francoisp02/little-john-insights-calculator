@@ -10,12 +10,31 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import littleJohnLogo from '../assets/LOGO_LITTLE_JOHN_NOIR_DEGRADE_RVB.png';
 export const QuestionnaireStep2 = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    contractsPerMonth: 15,
-    averagePremium: 15000,
-    conversionRate: 80,
-    employeeCount: ''
-  });
+  
+  // Récupération des données pré-saisies depuis le localStorage
+  const getInitialData = () => {
+    // Essayer de récupérer les données de la page Calculator (Index)
+    const savedCalculatorData = localStorage.getItem('calculatorData');
+    if (savedCalculatorData) {
+      const calculatorData = JSON.parse(savedCalculatorData);
+      return {
+        contractsPerMonth: calculatorData.contractsPerMonth || 15,
+        averagePremium: Math.round((calculatorData.averagePremium || 15000) * 1.2), // Conversion HT vers TTC approximative
+        conversionRate: 80,
+        employeeCount: ''
+      };
+    }
+    
+    // Sinon, utiliser les valeurs par défaut
+    return {
+      contractsPerMonth: 15,
+      averagePremium: 15000,
+      conversionRate: 80,
+      employeeCount: ''
+    };
+  };
+  
+  const [formData, setFormData] = useState(getInitialData());
   const handleSubmit = () => {
     // Store step 2 data in localStorage
     localStorage.setItem('questionnaireStep2', JSON.stringify(formData));

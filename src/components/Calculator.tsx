@@ -97,6 +97,16 @@ export const Calculator = () => {
     const saved = Math.abs(-(timeWithLittleJohn - timeWithoutTool)) / 7;
     setTimeSaved(saved);
   }, [contractsPerMonth, averagePremium, timeWithoutLittleJohn]);
+  
+  // Sauvegarder les données dans localStorage pour les pré-remplir dans le questionnaire
+  useEffect(() => {
+    const calculatorData = {
+      contractsPerMonth,
+      averagePremium,
+      timeWithoutLittleJohn
+    };
+    localStorage.setItem('calculatorData', JSON.stringify(calculatorData));
+  }, [contractsPerMonth, averagePremium, timeWithoutLittleJohn]);
   return <div className="min-h-screen bg-gradient-surface py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
